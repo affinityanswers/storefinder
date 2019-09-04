@@ -14,4 +14,9 @@ All the tools required for benchmarking are available in **benchmark** directory
 
 Running a benchmark can be done by running `python3  benchmark/benchmark.py`
 
-Usage instructions on benchmark settings can be obtained by running `python3 benchmark/benchmark.py -h`. 
+Usage instructions on benchmark settings can be obtained by running `python3 benchmark/benchmark.py -h`.
+
+Our test location database has around 1.5 million locations. For the purpose of this test, we performed the test on around 10,000 random locations and the results are as follows The time is for a single request.
+
+
+![benchmark scores](benchmark/benchmark.png)
