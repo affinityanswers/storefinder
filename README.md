@@ -1,4 +1,4 @@
-# FindEntitiesNearLatLong
+# Store Finder
 This Repo Contains Code to find nearest entities near a given lat, long.
 The Code is Designed to use in-memory instead of a traditional DB.
 
