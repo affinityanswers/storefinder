@@ -16,7 +16,7 @@ class NearestLocator:
 
 
       def  preprocess_location_db(self, location_db):
-           """ Optimise the Location Database
+           """ Optimise the Location Database i.e sort the locations based on latitude.
                location_db: Should be a python list having tuple elements.
                             tuple should be in a order (lat, lng, id)
            """
@@ -40,6 +40,15 @@ class NearestLocator:
       
 
       def find_nearest_locations(self, lat, lng, radius=50):
+          """
+            Find the nearest location for the given latitude and longitude within the given radius using Great Circle Distance Formula.
+            Args:
+                lat: the latitude of the Point of Interest.
+                lng: the longitude of the Point of Interest.
+                radius: The radius within which the latitude, longitude must be present in meters.
+            Returns:
+                All the ids of the locations that have satisfied the condition.
+          """
           km_radius = float(radius) / 1000
           dlat = km_radius / 111.325
           start = np.searchsorted(self.lat, lat - dlat, 'left')
@@ -47,7 +56,8 @@ class NearestLocator:
           qualified_lat = self.lat[start : end]
           qualified_lng = self.lng[start : end]
           qualified_ids = self.ids[start : end]
-          distances = 6371 * arccos(cos(radians(lat)) * cos(radians(qualified_lat) ) * cos(radians(qualified_lng ) - radians(lng) ) + sin( radians(lat)) * sin( radians( qualified_lat ) ) )
+          distances = 6371 * arccos(cos(radians(lat)) * cos(radians(qualified_lat)) * cos(radians(qualified_lng) - radians(lng)) 
+                                    + sin(radians(lat)) * sin(radians(qualified_lat)))
           distance_qualified = distances <= km_radius
           return set(qualified_ids[distance_qualified])
    
